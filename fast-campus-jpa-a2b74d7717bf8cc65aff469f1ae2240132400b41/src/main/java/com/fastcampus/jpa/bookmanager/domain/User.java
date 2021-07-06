@@ -1,14 +1,20 @@
 package com.fastcampus.jpa.bookmanager.domain;
 
-import lombok.*;
-
+import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
-
+/**
+ * @author Martin
+ * @since 2021/03/10
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
@@ -29,5 +35,4 @@ public class User {
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
-
 }
