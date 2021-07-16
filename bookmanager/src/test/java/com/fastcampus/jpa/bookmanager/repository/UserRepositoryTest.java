@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.*;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,12 +32,12 @@ class UserRepositoryTest {
 //        userRepository.saveAll(Lists.newArrayList(user1, user2));
 
 //        User user = userRepository.getOne(1L); // getOne은 entitiy에 대한 lazy한 로딩을 지원한다 - @Transactional 필요
-        User user = userRepository.findById(1L).orElse(null); // getOne은 entitiy에 대한 lazy한 로딩을 지원한다 - @Transactional 필요
-        System.out.println(user);
+//        User user = userRepository.findById(1L).orElse(null); // getOne은 entitiy에 대한 lazy한 로딩을 지원한다 - @Transactional 필요
+//        System.out.println(user);
 
-//        List<User> users = userRepository.findAll();
-//
-//        users.forEach(System.out::println);
+        List<User> users = userRepository.findAll();
+
+        users.forEach(System.out::println);
     }
 
     @Test
@@ -89,6 +90,34 @@ class UserRepositoryTest {
         Example<User> example = Example.of(user, matcher);
 
         userRepository.findAll(example).forEach(System.out::println);
+
+    }
+
+    @Test
+    void crud3(){
+        userRepository.save(new User("david", "david@fastcampus.com"));
+
+        User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        user.setEmail("martin-updated@fastcampus.com");
+
+        userRepository.save(user);
+    }
+
+    @Test
+    void select(){
+        System.out.println(userRepository.findByName("dennis"));
+
+        System.out.println("findByEmail : " + userRepository.findByEmail("martin@fastcampus.com"));
+        System.out.println("getByEmail : " + userRepository.getByEmail("martin@fastcampus.com"));
+        System.out.println("readByEmail : " + userRepository.readByEmail("martin@fastcampus.com"));
+        System.out.println("queryByEmail : " + userRepository.queryByEmail("martin@fastcampus.com"));
+        System.out.println("searchByEmail : " + userRepository.searchByEmail("martin@fastcampus.com"));
+        System.out.println("streamByEmail : " + userRepository.streamByEmail("martin@fastcampus.com"));
+        System.out.println("findUserByEmail : " + userRepository.findUserByEmail("martin@fastcampus.com"));
+        System.out.println("findSomethingByEmail : " + userRepository.findSomethingByEmail("martin@fastcampus.com"));
+
+        System.out.println("findTop2ByName : " + userRepository.findTop2ByName("martin"));
+        System.out.println("findFirst1ByName : " + userRepository.findFirst1ByName("martin"));
 
     }
 
