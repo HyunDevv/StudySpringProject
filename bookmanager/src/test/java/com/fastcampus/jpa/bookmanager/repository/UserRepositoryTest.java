@@ -9,6 +9,7 @@ import org.springframework.data.domain.*;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLOutput;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -105,19 +106,44 @@ class UserRepositoryTest {
 
     @Test
     void select(){
-        System.out.println(userRepository.findByName("dennis"));
+//        System.out.println(userRepository.findByName("dennis"));
+//
+//        System.out.println("findByEmail : " + userRepository.findByEmail("martin@fastcampus.com"));
+//        System.out.println("getByEmail : " + userRepository.getByEmail("martin@fastcampus.com"));
+//        System.out.println("readByEmail : " + userRepository.readByEmail("martin@fastcampus.com"));
+//        System.out.println("queryByEmail : " + userRepository.queryByEmail("martin@fastcampus.com"));
+//        System.out.println("searchByEmail : " + userRepository.searchByEmail("martin@fastcampus.com"));
+//        System.out.println("streamByEmail : " + userRepository.streamByEmail("martin@fastcampus.com"));
+//        System.out.println("findUserByEmail : " + userRepository.findUserByEmail("martin@fastcampus.com"));
+//        System.out.println("findSomethingByEmail : " + userRepository.findSomethingByEmail("martin@fastcampus.com"));
+//
+//        System.out.println("findTop2ByName : " + userRepository.findTop2ByName("martin"));
+//        System.out.println("findFirst1ByName : " + userRepository.findFirst1ByName("martin"));
 
-        System.out.println("findByEmail : " + userRepository.findByEmail("martin@fastcampus.com"));
-        System.out.println("getByEmail : " + userRepository.getByEmail("martin@fastcampus.com"));
-        System.out.println("readByEmail : " + userRepository.readByEmail("martin@fastcampus.com"));
-        System.out.println("queryByEmail : " + userRepository.queryByEmail("martin@fastcampus.com"));
-        System.out.println("searchByEmail : " + userRepository.searchByEmail("martin@fastcampus.com"));
-        System.out.println("streamByEmail : " + userRepository.streamByEmail("martin@fastcampus.com"));
-        System.out.println("findUserByEmail : " + userRepository.findUserByEmail("martin@fastcampus.com"));
-        System.out.println("findSomethingByEmail : " + userRepository.findSomethingByEmail("martin@fastcampus.com"));
+        System.out.println("findByEmailAndName : " + userRepository.findByEmailAndName("martin@fastcampus.com", "martin"));
+        System.out.println("findByEmailOrName : " + userRepository.findByEmailOrName("martin@fastcampus.com", "martin"));
 
-        System.out.println("findTop2ByName : " + userRepository.findTop2ByName("martin"));
-        System.out.println("findFirst1ByName : " + userRepository.findFirst1ByName("martin"));
+        System.out.println("findByCreatedAtAfter : " + userRepository.findByCreatedAtAfter(LocalDateTime.now().minusDays(1L)));
+        System.out.println("findByIdAfter : " + userRepository.findByIdAfter(4L));
+
+        System.out.println("findByCreatedAtGreaterThan : " + userRepository.findByCreatedAtGreaterThan(LocalDateTime.now().minusDays(1L)));
+        System.out.println("findByCreatedAtGreaterThanEqual : " + userRepository.findByCreatedAtGreaterThanEqual(LocalDateTime.now().minusDays(1L)));
+
+        System.out.println("findByCreatedAtBetween : " + userRepository.findByCreatedAtBetween(LocalDateTime.now().minusDays(1L), LocalDateTime.now().plusDays(1L)));
+        System.out.println("findByIdBetween : " + userRepository.findByIdBetween(1L, 3L));
+
+        System.out.println("findByIdIsNotNull : " + userRepository.findByIdIsNotNull());
+//        System.out.println("findByAddressIsNotEmpty : " + userRepository.findByAddressIsNotEmpty());
+
+        System.out.println("findByNameIn : " + userRepository.findByNameIn(Lists.newArrayList("martin", "dennis")));
+
+        System.out.println("findByNameStartingWith : " + userRepository.findByNameStartingWith("mar"));
+        System.out.println("findByNameEndingWith : " + userRepository.findByNameEndingWith("tin"));
+        System.out.println("findByNameContains : " + userRepository.findByNameContains("rti"));
+        System.out.println("findByNameLike : " + userRepository.findByNameLike("%" + "art" +"%"));
+
+
+
 
     }
 
