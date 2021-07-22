@@ -1,22 +1,27 @@
 package com.fastcampus.jpa.bookmanager.domain;
 
+import com.fastcampus.jpa.bookmanager.domain.listener.Auditable;
+import com.fastcampus.jpa.bookmanager.domain.listener.UserEntityListener;
 import lombok.*;
-import org.hibernate.annotations.Fetch;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Data
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @Entity
-@Table(name = "user")
-@EntityListeners(value = MyEntityListener.class)
-public class User implements Auditable {
+@Table
+@EntityListeners(value = {UserEntityListener.class})
+public class User extends BaseEntity implements Auditable {
     @Id
     @GeneratedValue
     private Long id;
@@ -31,14 +36,16 @@ public class User implements Auditable {
     private Gender gender;
 
     @Column(updatable = false)
+    @CreatedDate
     private LocalDateTime createdAt;
 
-//    @Column(insertable = false)
-    private LocalDateTime updatedAt;
-
-    // db데이터에 반영되지 않는다
-    @Transient
-    private String testData;
+////    @Column(insertable = false) // 엔티티 insert 시 필드 저장 유무
+//    @LastModifiedDate
+//    private LocalDateTime updatedAt;
+//
+//    // db데이터에 반영되지 않는다
+//    @Transient
+//    private String testData;
 
 //    @OneToMany(fetch = FetchType.EAGER)
 //    private List<Address> address;
