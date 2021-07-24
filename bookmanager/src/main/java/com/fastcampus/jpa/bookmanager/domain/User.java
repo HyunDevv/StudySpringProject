@@ -21,9 +21,9 @@ import java.time.LocalDateTime;
 @Entity
 @Table
 @EntityListeners(value = {UserEntityListener.class})
-public class User extends BaseEntity implements Auditable {
+public class User extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NonNull
