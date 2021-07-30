@@ -23,11 +23,12 @@ public class UserHistory extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long userId;
-
     private String name;
 
     private String email;
+
+    @ManyToOne
+    private User user;
 
 //    @CreatedDate
 //    private LocalDateTime createdAt;
