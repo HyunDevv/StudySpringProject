@@ -7,3 +7,11 @@ spring:
     properties: # 쿼리를 보기 좋게 한다
       hibernate:
         format_sql: true
+    generate-ddl: false  # mysql로 추가 / jpa하위 속성으로 jpa구현체와 상관없이 자동 ddl
+    hibernate:          # mysql로 추가
+      ddl-auto: create-drop  # generate-ddl보다 우선적인 세부적 옵션
+  datasource:
+    url: jdbc:mysql://localhost:3306/book_manager
+    username: root
+    password: 11111111
+    initialization-mode: always # data.sql 파일을 실행시켜준다, schema.sql이 있으면 ddl-auto는 무시된다
