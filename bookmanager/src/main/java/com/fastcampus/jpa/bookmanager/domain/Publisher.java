@@ -21,7 +21,7 @@ public class Publisher extends BaseEntity{
 
     private String name;
 
-    @OneToMany
+    @OneToMany(orphanRemoval = true) // 필요없어진 고아객체 제거 / setOrders(null) 일 때 제거
     @JoinColumn(name = "publisher_id")
     @ToString.Exclude
     private List<Book> books = new ArrayList<>();
